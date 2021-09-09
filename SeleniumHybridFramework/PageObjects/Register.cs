@@ -11,12 +11,14 @@ namespace SeleniumHybridFramework.PageObjects
     public class Register
     {
         private readonly IWebDriver _driver;
+        private readonly WebDriverWait _myWait;
         public Register(IWebDriver driver)
         {
             _driver = driver;
         }
-        //WebDriverWait myWait = new WebDriverWait(IWebDriver driver, TimeSpan.FromSeconds(10));
-        public IWebElement btnSignIn => _driver.FindElement(By.XPath("//div[@class='header_user_info']//a"));
+        
+        //public IWebElement btnSignIn => _driver.FindElement(By.XPath("//div[@class='header_user_info']//a"));
+        public IWebElement btnSignIn => new WebDriverWait(_driver, TimeSpan.FromSeconds(2)).Until(ExpectedConditions.ElementIsVisible(By.XPath("//div[@class='header_user_info']//a")));
         public IWebElement txtEmailId => _driver.FindElement(By.Id("email_create"));
         public IWebElement btnSubmit => _driver.FindElement(By.Id("SubmitCreate"));
         public IWebElement radioGender => _driver.FindElement(By.XPath("//div[@id='uniform-id_gender1']"));
@@ -53,11 +55,11 @@ namespace SeleniumHybridFramework.PageObjects
         {
             SelectElement selDate = new SelectElement(drpDateOnDOB);
             selDate.SelectByValue(date);
-            System.Threading.Thread.Sleep(1000);
+            //System.Threading.Thread.Sleep(1000);
             selDate.SelectByValue(month);
-            System.Threading.Thread.Sleep(1000);
+            //System.Threading.Thread.Sleep(1000);
             selDate.SelectByValue(year);
-            System.Threading.Thread.Sleep(1000);
+            //System.Threading.Thread.Sleep(1000);
 
         }
         public void SelectState(string state)
